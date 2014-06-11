@@ -19,7 +19,7 @@ system("$cmd & echo $displayNumber");                  ////289行---添加的行
 运行vncserver 输入vncserver密码：此处输入demo123,如果不是demo123同时修改文件process.js的turnToNOVNC函数里的password变量。
 修改～/.xstartup文件为以下内容：
 
-**********************************************
+*****************xstartup**********************
 #!/bin/sh
 unset SESSION_MANAGER
 unset DBUS_SESSION_BUS_ADDRESS
