@@ -6,14 +6,13 @@ for (i=0; i < aParams.length ; i++){
        var aParam = aParams[i].split('=');
        URLParams[aParam[0].toUpperCase()] = aParam[1];
        }
-var ipstr = URLParams["IP"];
-var portstr = URLParams["PORT"];
+document.getElementById("noVNC_host").value = URLParams["IP"];
+document.getElementById("noVNC_port").value = URLParams["PORT"];
 //alert("ip="+ipstr+" port="+portstr);
-var ip = document.getElementById("noVNC_host");
-var port = document.getElementById("noVNC_port");
-ip.value = ipstr;
-port.value = portstr;
-
+//var ip = document.getElementById("noVNC_host");
+//var port = document.getElementById("noVNC_port");
+//ip.value = ipstr;
+//port.value = portstr;
 //UI.connect();
 }
 //这样需要哪个参数，就用以下方法取得：

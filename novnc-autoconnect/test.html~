@@ -10,7 +10,7 @@
 	设置ip地址：
 	<input type="text" id="noVNC_host" value="sadjfk"/>
 	设置端口号：
-	<input type="text" id="noVNC_post" value="sdfa"/>
+	<input type="text" id="noVNC_port" value="sdfa"/>
 	</div>
     	<div>使用远程桌面打开网页地址：
 	<input type="text" id="address" value="www.sohu.com"/>

@@ -83,6 +83,8 @@ start: function(callback) {
     /* Populate the controls if defaults are provided in the URL */
     UI.initSetting('host', window.location.hostname);
     UI.initSetting('port', port);
+    //UI.initSetting('host','');
+    //UI.initSetting('port',$D('noVNC_port').value);
     UI.initSetting('password', 'wt153138');
     UI.initSetting('encrypt', (window.location.protocol === "https:"));
     UI.initSetting('true_color', true);
@@ -141,7 +143,7 @@ start: function(callback) {
 
     $D('noVNC_host').focus();
 
-    UI.setViewClip();
+    UI  .setViewClip();
     Util.addEvent(window, 'resize', UI.setViewClip);
 
     Util.addEvent(window, 'beforeunload', function () {

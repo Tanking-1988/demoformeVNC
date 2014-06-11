@@ -7,13 +7,24 @@
 #
 #
 #
+WEBSOCKIFY_PORT="5959"
+VNC_PORT="11" 
+HOST="localhost"
+W_DIR="/home/wt/spice-html5/websockify"
 X_DIR="/home/wt/.vnc";
 if [ $# != 2 ] 
 then
 	echo "Error Input!" >&2
 else
+
+	#check websockify is opened? if not then open 
+	websockifyList=`ps -aux | grep $WEBSOCKIFY_PORT | grep websockify` >> /dev/null
+	if [ "$websockifyList"x = ""x ]; then
+        gnome-terminal -e "$W_DIR/websockify.py $WEBSOCKIFY_PORT $HOST:59$VNC_PORT"
+        fi
+
 	#杀死已有的vnc服务;
-	list=`ls $X_DIR | grep .11.pid` >> /dev/null
+	list=`ls $X_DIR | grep .$VNC_PORT.pid` >> /dev/null
         if [ "$list"x != ""x ]; then
         vncserver -kill :11
         fi
@@ -40,13 +51,6 @@ else
 	 #if [ "$list"x != ""x ]; then
 	 #vncserver -kill :11
 	 #fi
-	 vncserver :11 
+	 vncserver :11
 	 
-	#/usr/lib/chromium-browser/chromium-browser ./novnc-autoconnect/vnc.html
-	
-	 #打开网页端的vnc客户端，
-	 #具体网址和端口密码配置在文件novnc-autoconnect/include/ui.js文件中配置
-	 #
-	 #/usr/lib/chromium-browser/chromium-browser ./novnc-autoconnect/vnc.html
 fi
-

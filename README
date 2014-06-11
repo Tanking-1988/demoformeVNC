@@ -1,0 +1,12 @@
+本程序是基于vncserver，websockify，以及node-webkit,在运行程序前，请安装vncserver和websockify，并确保vncserver可以正常运行。具体的配置过程见说明文档。
+安装好vncserver后进行如下修改：
+编辑vncserver文件，在第289行添加代码
+sudo vim /usr/bin/vncserver
+///vncserver 289行内容
+# Give Xvnc4 a chance to start up
+sleep(3);
+warn "\nNew '$desktopName' desktop is $host:$displayNumber\n\n";
+//////system("$cmd & echo $displayNumber");////289行
+# Create the user's xstartup script if necessary.
+输出开启vncserver的虚拟端口号，实际端口号为5900+虚拟端口号
+
