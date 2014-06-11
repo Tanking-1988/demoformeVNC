@@ -1,12 +1,49 @@
-本程序是基于vncserver，websockify，以及node-webkit,在运行程序前，请安装vncserver和websockify，并确保vncserver可以正常运行。具体的配置过程见说明文档。
+程序说明
+本程序是基于vncserver，websockify，以及node-webkit,
+
+----------------------vncserver--------------------------------------
+
+在运行程序前，请安装vncserver并确保vncserver可以正常运行。具体的配置过程见说明文档。
 安装好vncserver后进行如下修改：
-编辑vncserver文件，在第289行添加代码
+编辑vncserver文件，在第289行添加代码也可能是其他行 
 sudo vim /usr/bin/vncserver
 ///vncserver 289行内容
 # Give Xvnc4 a chance to start up
-sleep(3);
+....
 warn "\nNew '$desktopName' desktop is $host:$displayNumber\n\n";
-//////system("$cmd & echo $displayNumber");////289行
+system("$cmd & echo $displayNumber");                  ////289行---添加的行用以在process.js获取输出端口
+...
 # Create the user's xstartup script if necessary.
 输出开启vncserver的虚拟端口号，实际端口号为5900+虚拟端口号
+
+运行vncserver 输入vncserver密码：此处输入demo123,如果不是demo123同时修改文件process.js的turnToNOVNC函数里的password变量。
+修改～/.xstartup文件为以下内容：
+
+**********************************************
+#!/bin/sh
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+startxfce4 &
+
+[ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+xsetroot -solid grey
+vncconfig -iconic &
+***********************************************
+
+同时复制一份此文件的备份，到当前目录下文件名为：xstartup-copy
+cp ./xstartup ./xstartup-copy
+
+---------------------------------修改必要路径-----------------------------
+修改 run.sh 文件 用于运行nw
+
+修改open.sh
+X_DIR   vnc的用户配置文件路径，可以修改为其他路径，如果修改，也必须修改vncserver文件里的vncUserDir变量的值
+W_DIR   websockify的目录，在此使用的是noVNC目录下的websockify，不用修改。
+WEBSOCKIFY_PORT  websockify启动时所占用的端口，不用修改
+VNC_PORT   VNC服务占用的端口
+HOST   VNC服务的主机，在此是相对websockify的主机地址，默认为localhost，不用修改
+
+
+
 

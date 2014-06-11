@@ -83,9 +83,7 @@ start: function(callback) {
     /* Populate the controls if defaults are provided in the URL */
     UI.initSetting('host', window.location.hostname);
     UI.initSetting('port', port);
-    //UI.initSetting('host','');
-    //UI.initSetting('port',$D('noVNC_port').value);
-    UI.initSetting('password', 'wt153138');
+    UI.initSetting('password', $D('noVNC_password').value);
     UI.initSetting('encrypt', (window.location.protocol === "https:"));
     UI.initSetting('true_color', true);
     UI.initSetting('cursor', !UI.isTouchDevice);
@@ -100,7 +98,7 @@ start: function(callback) {
                   'onClipboard': UI.clipReceive,
                   'onDesktopName': UI.updateDocumentTitle});
 
-    autoconnect = WebUtil.getQueryVar('autoconnect', true);
+    autoconnect = WebUtil.getQueryVar('autoconnect', false);
     if (autoconnect === 'true' || autoconnect == '1') {
         autoconnect = true;
         UI.connect();
@@ -676,7 +674,7 @@ updateDocumentTitle: function(rfb, name) {
 clipReceive: function(rfb, text) {
     Util.Debug(">> UI.clipReceive: " + text.substr(0,40) + "...");
     $D('noVNC_clipboard_text').value = text;
-    Util.Debug("<< UI.clipReceive");
+    Util.Debug("<< UI.clipReceive");153138
 },
 
 
@@ -688,10 +686,10 @@ connect: function() {
 
     host = $D('noVNC_host').value;
     port = $D('noVNC_port').value;
-    //password = $D('noVNC_password').value;
+    password = $D('noVNC_password').value;
     //host = 'localhost';
     //port = '5959';
-    password = "wt153138";
+    //password = "demo123";
     path = $D('noVNC_path').value;
     if ((!host) || (!port)) {
         throw("Must set host and port");

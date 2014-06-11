@@ -5,13 +5,13 @@
 #	./open.sh -web www.baidu.com  //默认启动百度搜索的远程桌面
 #	./open.sh -doc /home/wt/文档/vnc.doc  //默认打开vnc.doc的远程桌面。
 #
-#
-#
+
 WEBSOCKIFY_PORT="5959"
 VNC_PORT="11" 
 HOST="localhost"
-W_DIR="/home/wt/spice-html5/websockify"
+W_DIR="./noVNC/utils"
 X_DIR="/home/wt/.vnc";
+
 if [ $# != 2 ] 
 then
 	echo "Error Input!" >&2
@@ -26,7 +26,7 @@ else
 	#杀死已有的vnc服务;
 	list=`ls $X_DIR | grep .$VNC_PORT.pid` >> /dev/null
         if [ "$list"x != ""x ]; then
-        vncserver -kill :11
+        vncserver -kill :$VNC_PORT
         fi
 
     if [ $1x = "-web"x ]   #默认打开搜狐网页
@@ -45,12 +45,6 @@ else
 		fi
 	fi	
     fi
-	# echo $1;
-	# echo $2;
-	 #list=`ls $X_DIR | grep .11.pid` >> /dev/null
-	 #if [ "$list"x != ""x ]; then
-	 #vncserver -kill :11
-	 #fi
-	 vncserver :11
+	 vncserver :$VNC_PORT
 	 
 fi

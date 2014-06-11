@@ -8,10 +8,11 @@ function apendText(text){
 function openWeb(){
 	var sys = require('sys');
 	var IPv4;
+	
 	var exec = require('child_process').exec;
 	var add = document.getElementById('address');
 	var port = document.getElementById('port');
-	var str = "bash /home/wt/test/test-ff/open.sh -web " + add.value; 
+	var str = "bash ./open.sh -web " + add.value; 
 	var ip = document.getElementById('ip');
 	ip.value=getIp();
 	apendText(str);
@@ -29,6 +30,7 @@ function openWeb(){
 	}
 	});
 	//setTimeout(turnToNOVNC, 3000);
+	
 }
 
 //点击打开文档相应函数，
@@ -38,7 +40,7 @@ function openDoc(){
 	var docstr = document.getElementById('docPath');
 	var port = document.getElementById('port');
 	var ip = document.getElementById('ip');
-	var str = "bash /home/wt/test/test-ff/open.sh -doc " + docstr.value;
+	var str = "bash ./open.sh -doc " + docstr.value;
 	ip.value=getIp();//设置页面的地址
 	apendText(str);
 	exec(str, function (error, stdout, stderr) {
@@ -60,8 +62,9 @@ function turnToNOVNC()
 {
 	var ip = document.getElementById('ip');
 	var port = document.getElementById('port');
-	//window.location.href="novnc-autoconnect/vnc.html?ip="+ip.value+"&port="+port.value; 
-	window.open("novnc-autoconnect/vnc.html?ip="+ip.value+"&port="+port.value);
+	var password = "demo123";
+	//window.location.href="novnc-autoconnect/vnc.html?host="+ip.value+"&port="+port.value; 
+	window.open("noVNC/vnc.html?host="+ip.value+"&port="+port.value+"&password="+password+"&autoconnect=true");
 	//window.open("novnc-autoconnect/test.html?ip="+ip.value+"&port="+port.value);
 }
 
@@ -87,7 +90,7 @@ function getIp()
 //修改端口号，从vncport 到 websockify port
 function portchange(port)
 {
-	portNum = parseInt(port);
-	portNum = portNum + 5948;
-	return portNum;
+	//portNum = parseInt(port);
+	//portNum = portNum + 5948;
+	return "5959";
 }
